@@ -1,0 +1,383 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta charset="utf-8">
+<title>SIREP Login</title>
+
+<script src="../js/jquery-1.6.4.min.js" type="text/javascript"></script>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+
+
+
+
+
+
+</head> 
+<body> 
+
+<div>
+	<!--Este es el inicio de session -->
+	<div id="cabecera">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <td>
+            <img src="../images/icoSession.png"/>
+            </td>
+            <td width="90%">
+            bienvenido: Usuario Logueado
+            </td>
+            <td>
+            <a href="" style="color:#FFF">Cerrar Session</a>
+            </td>
+        </table>
+</div>
+<br>
+<br>
+<br>
+<br>
+    
+    <div id="botonera" align="center">
+        <div style="max-width:960px">
+            <div align="left" style="width:27%; display:inline-table; vertical-align:bottom; margin-left:10px">
+                <img src="../images/SIREP-LOGO.png" width="200" />
+            </div>
+     
+            <div align="right" style="display:inline-table; width:70%; margin-bottom:5px">
+				<a href="index.html"><button class="boton">Inicio</button></a>
+                <a href="Productores.html"><button class="boton">Productores</button></a>
+                <a href="productos.html"><button class="boton">Productos</button></a>
+                <a href="EnviosMasivos.html"><button class="boton">Envios Masivos</button></a>
+                <a href="index.html"><button class="boton">Fuentes</button></a>
+                <a href="index.html"><button class="boton">Reportes</button></a>
+            </div>
+        </div>
+    </div>
+    <br>
+
+
+    
+    <!--Este es el contenido de la Pagina -->
+  	<div id="tiModulos">
+    <div style="float:left;" >
+    <img src="../images/ico_Productores.png" width="30" height="30"/>
+    </div>
+    <div style="height:30px; float:left; vertical-align:middle; font-size:18px; font-weight:bold; margin-left:10px; padding-top:3px">Productores</div>
+    </div>
+    <br>
+    
+    
+    <div id="contenedorResponsive">
+        <!-- Buscar Productores ----------------------------------->
+        <div id="cajas">
+       		<div id="titulos">Buscar Productor</div>
+            <br>
+            <form method="get" name="buscarProductor" action="">
+    		<div align="center">
+               <div id="entradaTexto">
+               <label>Celular&nbsp;&nbsp;</label>
+               <input type="text" name="name1">
+               </div>
+               <div id="entradaTexto">
+               <label>Cédula&nbsp;&nbsp;</label>
+               <input type="text" name="name1">
+               </div>
+               
+               <div id="entradaTexto">
+                <input type="button" value="Buscar" class="boton">
+               </div>
+           </div>
+           
+           
+           
+           
+
+            </form>
+            </div>
+        <br>
+        
+     </div>
+     <br>
+
+     <div id="contenedorResponsive">  
+       
+        
+        <!-- Agregar Datos Personales ----------------------------------->
+		<form method="get" name="AgregarProductor">
+        <div id="cajas" align="left">
+           <div id="titulos"> Datos Personales</div>
+           <br>
+           
+           <div id="entradaTexto">
+           <label>Primer Nombre</label><br><input type="text" name="name1">
+           </div>
+           <div id="entradaTexto">
+            <label>Segundo Nombre</label><br><input type="text" name="name2">
+           </div>
+           <div id="entradaTexto">
+            <label>Primer Apellido</label><br><input type="text" name="name3">
+           </div>
+           <div id="entradaTexto">
+            <label>Segundo Apellido</label><br><input type="text" name="name4">
+           </div>
+           <div id="entradaTexto">
+            <label>Cédula</label><br><input type="text" name="name5">
+           </div>
+           <div id="entradaTexto">
+            <label>Email</label><br><input type="text" name="name6">
+           </div>
+           
+           <div id="entradaTexto">
+           <label>Profesion</label><br><input type="text" name="name1">
+           </div>
+           <div id="entradaTexto">
+            <label>Asistente Técnico</label><br>
+           <select name="Dep">
+            <option value="">Selecciona</option>
+              <option value="valor1">valor1</option>
+              <option value="valor2">valor2</option>
+              <option value="valor3">valor3</option>
+			</select>
+           </div>
+           <div id="entradaTexto">
+            <label>Celular</label><br><input type="text" name="name3">
+           </div>
+           
+           <div id="entradaTexto">
+           <label> Operador</label><br>
+           <select name="Dep">
+            <option value="">Selecciona</option>
+              <option value="valor1">valor1</option>
+              <option value="valor2">valor2</option>
+              <option value="valor3">valor3</option>
+			</select>
+           </div>
+           
+           <div id="entradaTexto">
+           <label>Fuente</label><br>
+           <select name="Dep">
+            <option value="">Selecciona</option>
+              <option value="valor1">valor1</option>
+              <option value="valor2">valor2</option>
+              <option value="valor3">valor3</option>
+			</select>
+           
+          
+           </div>
+           <div id="entradaTexto">
+            <label>Fecha Registro</label><br><input disabled="disabled" type="text" name="name6">
+           </div>
+            
+           
+           
+           
+           
+           
+           
+            <!--<table width="95%">
+                <tr>
+                    <td width="250" align="right">
+                    <label>Primer Nombre</label>
+                    <input type="text" name="name1">
+                    </td>
+                    <td width="250" align="right">
+                    <label>Segundo Nombre</label>
+                    <input type="text" name="name2">
+                    </td>
+                </tr>
+                <tr>
+                    <td width="250" align="right">
+                    <label>Primer Apellido</label>
+                    <input type="text" name="apellido1">
+                    </td>
+                    <td width="250" align="right">
+                    <label>Segundo Apellido</label>
+                    <input type="text" name="apellido2">
+                    </td>
+                </tr>
+                <tr>
+                    <td width="250" align="right">
+                    <label>Cedula</label>
+                    <input type="text" name="cedula">
+                    </td>
+                    <td width="250" align="right">
+                    <label>Email</label>
+                    <input type="text" name="mail">
+                    </td>
+                </tr>
+                <tr>
+                    <td width="250" align="right">
+                    <label>Profesión</label>
+                    <input type="text" name="Profesion">
+                    </td>
+                    <td width="250" align="right">
+                    <label>Asistente Técnico</label><option>
+                    <input type="text" name="AsTecnico">
+                    </td>
+                </tr>
+                <tr>
+                    <td width="250" align="right">
+                    <label>Celular</label>
+                    <input type="text" name="celular">
+                    </td>
+                    <td width="250" align="right">
+                    <label>Operador</label>
+                    <input type="text" name="operador"><option>
+                    </td>
+             	</tr> 
+                <tr>
+                <td width="250"align="right">Fuente
+                  <input type="text" name="operador"><option>
+                 </td>
+                 <td width="250"align="right">Fecha Registro
+                  <input type="text" name="operador"><option>
+                 </td>
+                </tr>  
+                </table>-->
+            <br>
+		</div>
+        <br>
+        
+        <!-- Agregar Ubicación ----------------------------------->
+		<div id="cajas" align="left">
+            <div id="titulos">Ubicación</div>
+            
+
+            <div id="entradaTexto">
+            <label>Departamento</label><br>
+           <select name="Dep">
+            <option value="">Selecciona</option>
+              <option value="valor1">valor1</option>
+              <option value="valor2">valor2</option>
+              <option value="valor3">valor3</option>
+			</select>
+           </div>
+           
+           <div id="entradaTexto">
+            <label>Municipio</label><br>
+           <select name="Dep">
+            <option value="">Selecciona</option>
+              <option value="valor1">valor1</option>
+              <option value="valor2">valor2</option>
+              <option value="valor3">valor3</option>
+			</select>
+           </div>
+           
+           <div id="entradaTexto">
+            <label>Vereda</label><br><input type="text" name="name6">
+           </div>
+           
+           <div id="entradaTexto">
+           <label>Finca</label><br><input type="text" name="name1">
+           </div>
+		</div>
+        <br>
+        
+        
+        <!-- Agregar Ubicación ----------------------------------->
+		<div id="cajas" align="center">
+            <div id="titulos">Actividad Agropecuaria</div>
+            <br>
+
+         
+            <div align="right" style="display:inline-table; width:30%; height:68px">
+                <div id="entradaTexto">
+                <label>Actividad&nbsp;&nbsp;</label>
+                 <select name="imagen">
+                <option value="">Selecciona</option>
+                  <option value="valor1">valor1</option>
+                  <option value="valor2">valor2</option>
+                  <option value="valor3">valor3</option>
+                </select>
+                </div>
+                <br>
+               
+                <div id="entradaTexto">
+                <label>Tecnificación&nbsp;&nbsp;</label>
+                <select name="imagen">
+                <option value="">Selecciona</option>
+                  <option value="valor1">valor1</option>
+                  <option value="valor2">valor2</option>
+                  <option value="valor3">valor3</option>
+                </select>
+                </div>
+            </div>
+
+
+
+            <!-- tabla dinamica ----------------------------------->
+            
+            <div style="display:inline-table; width:447px; height:68">
+             <!-- aqui se ejecuta el While para que se repita mientras exista------>
+               <div style="overflow: auto; width:447; height:68px">
+                <table style="width:430px; text-align: left" border="1" bordercolor="#9C9" cellpadding="0" cellspacing="0">
+                <!-- aqui se ejecuta el while -->
+                <tr>
+                    <td id="celEsp"  width="75%" style="padding-left:10px">producto x</td>
+                    <td id="celEsp" width="25%" style=" background-color:#FFF; text-align:center"><a href=""><font color="#000000"><strong>Eliminar</strong></font></a></td>
+                </tr>
+                 <tr>
+                    <td id="celEsp"  width="75%" style="padding-left:10px">producto x</td>
+                    <td id="celEsp" width="25%" style=" background-color:#FFF; text-align:center"><a href=""><font color="#000000"><strong>Eliminar</strong></font></a></td>
+                </tr>
+                 <tr>
+                    <td id="celEsp"  width="75%" style="padding-left:10px">producto x</td>
+                    <td id="celEsp" width="25%" style=" background-color:#FFF; text-align:center"><a href=""><font color="#000000"><strong>Eliminar</strong></font></a></td>
+                </tr>
+                 <tr>
+                    <td id="celEsp"  width="75%" style="padding-left:10px">producto x</td>
+                    <td id="celEsp" width="25%" style=" background-color:#FFF; text-align:center"><a href=""><font color="#000000"><strong>Eliminar</strong></font></a></td>
+                </tr>
+                 <tr>
+                    <td id="celEsp"  width="75%" style="padding-left:10px">producto x</td>
+                    <td id="celEsp" width="25%" style=" background-color:#FFF; text-align:center"><a href=""><font color="#000000"><strong>Eliminar</strong></font></a></td>
+                </tr>
+                <tr>
+                    <td id="celEsp"  width="75%" style="padding-left:10px">producto x</td>
+                    <td id="celEsp" width="25%" style=" background-color:#FFF; text-align:center"><a href=""><font color="#000000"><strong>Eliminar</strong></font></a></td>
+                </tr>
+                <tr>
+                    <td id="celEsp"  width="75%" style="padding-left:10px">producto x</td>
+                    <td id="celEsp" width="25%" style=" background-color:#FFF; text-align:center"><a href=""><font color="#000000"><strong>Eliminar</strong></font></a></td>
+                </tr>
+                <tr>
+                    <td id="celEsp"  width="75%" style="padding-left:10px">producto x</td>
+                    <td id="celEsp" width="25%" style=" background-color:#FFF; text-align:center"><a href=""><font color="#000000"><strong>Eliminar</strong></font></a></td>
+                </tr>
+                
+                
+                
+                <!-- -->
+                </table> 
+                </div>
+            </div>
+   
+		</div>
+        <br>
+        
+        
+        
+       <!-- Botones ----------------------------------->
+       <div align="center">
+       <button class="boton">GUARDAR PRODUCTOR</button><br>
+        <button class="boton">Limpiar Formulario</button>
+        </div>
+        
+        </form>
+        
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        
+
+	<!--este es el pie de Pagina -->
+  <div id="piePagina">
+		Desarrollado por Celmedia MKT S.A.
+	</div>
+</div>
+
+
+
+
+</body>
+</html>
