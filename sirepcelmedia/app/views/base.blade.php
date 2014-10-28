@@ -6,6 +6,8 @@
 
 	{{ HTML::style('css/style.css') }}
 	{{ HTML::script('js/jquery-1.6.4.min.js') }}
+    {{ HTML::script('js/jquery.js') }}
+    {{ HTML::script('js/functions.js') }}
 
 </head>
 <body>
@@ -18,10 +20,10 @@
             	<img src="images/icoSession.png"/>
             </td>
             <td width="90%">
-            	Bienvenido: Usuario Logueado
+            	Bienvenido: {{ Auth::user()->nombres; }}
             </td>
             <td>
-            	<a href="" style="color:#FFF">Cerrar Session</a>
+            	<a href="{{ url('/logout') }}" style="color:#FFF">Cerrar Sessiones</a>
             </td>
         </table>
     </div>
@@ -40,7 +42,7 @@
             <div align="right" style="display:inline-table; width:70%; margin-bottom:5px">
                 <a href="{{ url('/Menu') }}"><button class="boton">Inicio</button></a>
                 <a href="{{ url('/BuscarProductor') }}"><button class="boton">Productores</button></a>
-                <a href="{{ url('/AddProducto') }}"><button class="boton">Productos</button></a>
+                <a href="{{ url('/AgregarVariedad') }}"><button class="boton">Productos</button></a>
                 <a ><button class="boton">Envios Masivos</button></a>
                 <a ><button class="boton">Fuentes</button></a>
                 <a ><button class="boton">Reportes</button></a>

@@ -1,16 +1,18 @@
 <?php
 
 class UserController extends BaseController{
+
+	
 	
 	public function crearuser(){
 
-		for ($i=0; $i < 500; $i++) { 
+		//for ($i=0; $i < 50; $i++) { 
 		$user = new User;
-		$user->nombres='nombre usuarios';
-		$user->apellidos='apellidos';
-		$user->username='username'.$i;
-		$user->email='email'.$i;
-		$user->password='password';
+		$user->nombres='Jhonatan';
+		$user->apellidos='Acelas Arevalo';
+		$user->username='jhonatan';
+		$user->email='email';
+		$user->password=Hash::make('admin');
 		$user->cedula='cedula';
 		$user->contrato='contrato';
 		$user->celular='celular';
@@ -18,7 +20,7 @@ class UserController extends BaseController{
 		$user->municipio='municipio';
 		$user->municipio='municipio';
 		$user->save();
-		}
+		//}
 
 		return Response::json(SubGrupo::all());
 

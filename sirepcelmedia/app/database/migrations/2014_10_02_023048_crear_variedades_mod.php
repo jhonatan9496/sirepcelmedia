@@ -16,6 +16,7 @@ class CrearVariedadesMod extends Migration {
             $table->increments('id');
             
             $table->string('nombre_variedad',100);
+            $table->string('codigo_dane',20);
             //llave foranea variedad-producto
             $table->integer('producto_id')->unsigned();
             $table->foreign('producto_id')->references('id')->on('productos')->onDelete('cascade');

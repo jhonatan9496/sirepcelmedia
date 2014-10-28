@@ -45,7 +45,7 @@
                         </select>
                     </td>
                    <td id="celdas" width="20%">
-                    	{{ Form::select('producto', $productos) }}
+                    	{{ Form::select('producto',array('Seleccionar Producto' ,$productos)) }}
                     </td>
                     <td id="celdas" width="20%">
                         

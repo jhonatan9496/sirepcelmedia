@@ -1,30 +1,39 @@
-<!DOCTYPE html> 
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<title>SIREP Login</title>
+  <meta charset="UTF-8">
+  <title> @yield('titulo') </title>
 
-{{ HTML::style('css/style.css') }}
-{{ HTML::script('js/jquery-1.6.4.min.js') }}
+  {{ HTML::style('css/style.css') }}
+  {{ HTML::script('js/jquery-1.6.4.min.js') }}
+    {{ HTML::script('js/jquery.js') }}
+    {{ HTML::script('js/functions.js') }}
 
-</head> 
-<body> 
+</head>
+<body>
 
-<div>
-	<!--esta es la cabecera -->
-	<div id="cabecera">
+
+    <!--Cabecera -->
+    <div id="cabecera">
         <table width="100%" border="0" cellpadding="0" cellspacing="0">
             <td>
-            <img src="images/icoSession.png"/>
+              <img src="images/icoSession.png"/>
             </td>
             <td width="90%">
-            bienvenido: Usuario Logueado
+              Bienvenido: {{ Auth::user()->nombres; }}
             </td>
             <td>
-            <a href="" style="color:#FFF">Cerrar Session</a>
+              <a href="{{ url('/logout') }}" style="color:#FFF">Cerrar Sessiones</a>
             </td>
         </table>
     </div>
+    <br>
+    <br>
+    <br>
+  <!--Cabecera -->
+
+
+
     <br>
     <br>
     <br>
@@ -36,7 +45,7 @@
     <br>
     
   <div class="alerta">
-Alerta!: Prueba!
+Alerta!: Ususario :  {{ Auth::user()->nombres; }}!
     </div>
     <br>
     
@@ -45,7 +54,7 @@ Alerta!: Prueba!
   <div id="menuHome">
         <div>
             <a href="{{ url('/BuscarProductor') }}"><img src="images/PRODUCTORES.png" id="icoMenu" width="130"/></a>
-            <a href="{{ url('/AddProducto') }}"><img src="images/PRODUCTOS.png" id="icoMenu" width="130"/></a>
+            <a href="{{ url('/AgregarVariedad') }}"><img src="images/PRODUCTOS.png" id="icoMenu" width="130"/></a>
             <a href="#"><img src="images/ENVIO_MASIVO.png" id="icoMenu" width="130"/></a>
         </div>
         <div>
@@ -72,8 +81,12 @@ Alerta!: Prueba!
 
 
 
+<!-- Fin Contenido de la paguina  -->
 
-
-
+  <!-- pie de Pagina -->
+        <div id="piePagina">
+          Desarrollado por Celmedia MKT S.A.
+        </div>
+    <!-- pie de Pagina -->
 </body>
 </html>

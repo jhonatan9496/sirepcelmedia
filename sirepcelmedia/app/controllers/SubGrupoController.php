@@ -38,4 +38,12 @@ class SubGrupoController extends BaseController{
 		$subgrupo =  SubGrupo::find($subgrupo_id);
 		$subgrupo->delete();
 	}
+
+// este metodo retorna los subgrupos filtrados por el grupo
+	public function filtrar_subgrupos($algo){
+		if(Request::ajax()){
+        	$subgrupos = DB::table('sub_grupos')->where('grupo_id', '=', $algo)->get();
+        	return Response::json(array('subgrupos' => $subgrupos));
+  		 }
+	}
 }

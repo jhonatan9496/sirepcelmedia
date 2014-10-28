@@ -8,7 +8,7 @@ class ProductorController extends BaseController{
 		$actividad = Actividad::find(Input::get('actividad'));
 		$fuente = Fuente::find(Input::get('fuente'));
 		$crea = User::find(1);
-		$actualiza = User::find(2);
+		$actualiza = User::find(1);
 		$municipio = Municipio::find(Input::get('municipios'));
 		$departamento = Departamento::find(Input::get('departamento'));
 		$operador = Operador::find(Input::get('operador'));
@@ -47,8 +47,8 @@ class ProductorController extends BaseController{
 		$productor->save();
 
 		//return Redirect::to('/AddProductor');
-		return View::make('ModuloProductores/ModificarProductor',array('alert' =>'Productor guardado','productorActualizar'=>$productor,'variedades'=>$variedades,'actividades'=>$actividad,'municipios'=>$municipio,'departamentos'=>$departamento,'operadores'=>$operador,'fuentes'=>$fuente));
-
+		//return View::make('ModuloProductores/ModificarProductor',array('alert' =>'Productor guardado','productorActualizar'=>$productor,'variedades'=>$variedades,'actividades'=>$actividad,'municipios'=>$municipio,'departamentos'=>$departamento,'operadores'=>$operador,'fuentes'=>$fuente));
+return View::make('ModuloProductores/BuscarProductor');		
 	}
 
 
@@ -82,7 +82,6 @@ class ProductorController extends BaseController{
 		$productor->save();
 
 		return View::make('ModuloProductores/ModificarProductor',array('alert' =>'Productor Actualizado','productorActualizar'=>$productor,'variedades'=>$variedades,'actividades'=>$actividades,'municipios'=>$municipios,'departamentos'=>$departamentos,'operadores'=>$operadores,'fuentes'=>$fuentes));
-
 	}
 
 	public function eliminarproductor(){

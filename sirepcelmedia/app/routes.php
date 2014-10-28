@@ -21,12 +21,10 @@ Route::get('/', function()
 });
 
 
-Route::get('/Menu', function()
-{
-	return View::make('Login/menu');
-});
 
-Route::get('/p', function()
+
+
+Route::get('/pruebas', function()
 {
 $operadores = Operador::all();
 return $operadores;
@@ -34,6 +32,28 @@ return $operadores;
 	//return Response::json(SubGrupo::all());
 	//return View::make('ModuloProductos/pruebasection');
 });
+
+
+
+// Nos mostrará el formulario de login.
+Route::get('login', 'AuthController@showLogin');
+
+// Validamos los datos de inicio de sesión.
+Route::post('login', 'AuthController@postLogin');
+
+// Nos indica que las rutas que están dentro de él sólo serán mostradas si antes el usuario se ha autenticado.
+Route::group(array('before' => 'auth'), function()
+{
+
+	Route::get('/Menu', function(){
+		return View::make('Login/menu');
+	});
+    
+    // Esta ruta nos servirá para cerrar sesión.
+    Route::get('logout', 'AuthController@logOut');
+
+
+
 
 
 
@@ -63,6 +83,7 @@ Route::get('BuscarProductor', function(){
 	return View::make('ModuloProductores/BuscarProductor');
 });
 
+
 //------------------------------------------------------------
 //                Modulo Productos
 //------------------------------------------------------------
@@ -76,6 +97,49 @@ Route::get('/AddProducto', function()
 	$cadenas=Cadena::all()->lists('nombre_cadena','id');
 
 	return View::make('ModuloProductos/AgregarProductos',array('grupos'=>$grupos,'subgrupos'=>$subgrupos,'productos'=>$productos,'cadenas'=>$cadenas));
+});
+
+
+Route::get('/AgregarVariedad', function(){
+	$grupos=Grupo::all()->lists('nombre_grupo','id');
+	$cadenas=Cadena::all()->lists('nombre_cadena','id');
+
+
+
+    return View::make('ModuloProductos/AgregarVariedad',array('grupos'=>$grupos,'cadenas'=>$cadenas));
+});
+
+// esta url es llamada en el java script por ajax
+// llama al metodo en el controlador para retornar via json los subgrupos
+Route::get('filtrar_subgrupos/{grupo_id}','SubGrupoController@filtrar_subgrupos');
+
+// esta url es llamada en el java script por ajax
+// llama al metodo en el controlador para retornar via json los productos
+Route::get('filtrar_productos/{subgrupo_id}','ProductoController@filtrar_productos');
+
+//  esta url es llamada por el formulairo de agregar variedad via ajax 
+//  y guarda el formulario de variedad en el metodo del controlador
+
+
+
+Route::post('guardarvariedad', 'VariedadController@guardarvariedad');
+
+
+
+Route::get('listarvariedades', 'VariedadController@listarvariedades');
+
+
+//------------------------------------------------------------
+//                Modulo Envios Masivos 
+//------------------------------------------------------------
+
+	Route::get('/EnviosMasivos', function()
+{
+	return View::make('ModuloEnviosMasivos/EnviosMasivos');
+});
+
+// Cierra verificacion autenticacion
+// Hacia arriba las rutas son obligatorias estar logueado
 });
 
 //------------------------------------------------------------

@@ -23,6 +23,7 @@ class CrearUser extends Migration {
             $table->string('celular');
             $table->string('departamento');
             $table->string('municipio');
+            $table->string('remember_token',100);
             $table->timestamps();
            // $table->rememberToken();
         });

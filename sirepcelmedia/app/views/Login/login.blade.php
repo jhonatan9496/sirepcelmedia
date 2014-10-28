@@ -19,19 +19,29 @@
     <br/>
     
 	<div id="formulario" align="center">
+
+		{{-- Preguntamos si hay algún mensaje de error y si hay lo mostramos  --}}
+        @if(Session::has('mensaje_error'))
+  <div class="alerta">
+            {{ Session::get('mensaje_error') }}
+			</div>
+
+        @endif
+
+        {{ Form::open(array('url' => '/login')) }}
 			
 	        
 			<label>Usuario:</label><br>
-		{{ Form::text('email', null, array('placeholder' => 'usuario', 'class' => 'form-control')) }}
+		{{ Form::text('username', null, array('placeholder' => 'usuario', 'class' => 'form-control','required')) }}
 	        <br/>
 						
 
 			<label>Contraseña:</label><br>
-			  {{ Form::password('password', array('class' => 'form-control')) }}
+			  {{ Form::password('password', array('class' => 'form-control','required')) }}
 	        <br>
 
 			<div class="checkbox">
-				<label><input type="checkbox">Recuerdame</label>
+				<label>{{ Form::checkbox('rememberme', true) }}Recuerdame</label>
 			</div>
 	        <br/>
 

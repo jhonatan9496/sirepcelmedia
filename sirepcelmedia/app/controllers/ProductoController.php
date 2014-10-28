@@ -41,6 +41,14 @@ class ProductoController extends BaseController{
 		return View::make('ModuloProductos.ListarProductos',array('produc'=>$productos));
 	}
 
+	// este metodo retorna los productos filtrados por el sub grupo
+	public function filtrar_productos($algo){
+		if(Request::ajax()){
+        	$subgrupos = DB::table('productos')->where('subgrupo_id', '=', $algo)->get();
+        	return Response::json(array('subgrupos' => $subgrupos));
+  		 }
+	}
+
 
 } 
 

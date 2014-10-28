@@ -3,7 +3,7 @@
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
-class User extends Eloquent {
+class User extends Eloquent  implements UserInterface, RemindableInterface {
 
 //DESCOMENTARIRA PARA AUTENTICACION DE USUARIOS
 //implements UserInterface, RemindableInterface {
@@ -51,6 +51,23 @@ class User extends Eloquent {
 	{
 		return $this->email;
 	}
+
+	public function getRememberToken()
+{
+    return $this->remember_token;
+}
+
+public function setRememberToken($value)
+{
+    $this->remember_token = $value;
+}
+
+public function getRememberTokenName()
+{
+    return 'remember_token';
+}
+
+
 
 	public function crea(){
 		return $this->hasMany('Productor','crea_id');
