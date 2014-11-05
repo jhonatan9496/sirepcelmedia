@@ -176,34 +176,34 @@ El productor no existe en la base de datos.
                     
                      <div id="entradaTexto">
                     <label>Producto/Variedad&nbsp;&nbsp;</label><br>
-                    {{Form::select('animal', array(
+                        {{Form::select('animal', array(
                             'Papa' => array('Tocarrena' => 'Papa pastusa'),
-                            'lechuga' => array('crespa' => 'Crespa'),
-                        ))}}
-                        {{ Form::select('variedades', $variedades) }}
+                            'lechuga' => array('crespa' => 'Crespa')))}}
+                    </div>
+                    <div id="entradaTexto">
+                    <label>Producto/Variedad&nbsp;&nbsp;</label><br>
+                        {{ Form::select('variedades', $variedades , null, array('id' => 'agregar_variedades' )) ;}}
+                        
 
                         <br>
                     </div>
                     <div id="entradaTexto">
-                        <input type="button" value="Agregar" class="boton">
+                        <a type="button" id="agregar_variedad" class="boton"> Agregar </a>
             		</div>
                 </div>
+
+                
 
                 <!-- tabla dinamica -->
                 <div style="display:inline-table; width:447px; height:200;  vertical-align:top; margin-top:15px">
                  <!-- aqui se ejecuta el While para que se repita mientras exista -->
                    <div style="overflow: auto; width:447; height:134px">
-                    <table style="width:430px; text-align: left" border="1" bordercolor="#9C9" cellpadding="0" cellspacing="0">
+                    <table name="tabla_agregar" style="width:430px; text-align: left" border="1" bordercolor="#9C9" cellpadding="0" cellspacing="0" id="tabla_variedades">
                     <!-- aqui se ejecuta el while -->
                     <tr>
-                        <td id="celEsp"  width="75%" style="padding-left:10px">producto x</td>
-                        <td id="celEsp" width="25%" style=" background-color:#FFF; text-align:center"><a href=""><font color="#000000"><strong>Eliminar</strong></font></a></td>
+                        <td id="celEsp"  width="75%" style="padding-left:10px"> <strong> Variedades del Productor</strong></td>
+                        <td id="celEsp" width="25%" style=" background-color:#FFF; text-align:center"><font color="#000000"><strong>Eliminar Variedad</strong></font></td>
                     </tr>
-                     <tr>
-                        <td id="celEsp"  width="75%" style="padding-left:10px">producto x</td>
-                        <td id="celEsp" width="25%" style=" background-color:#FFF; text-align:center"><a href=""><font color="#000000"><strong>Eliminar</strong></font></a></td>
-                    </tr>
-                    
                     <!-- -->
                     </table> 
                     </div>
@@ -219,52 +219,52 @@ El productor no existe en la base de datos.
                 <br>
                <div id="entradaTexto">
                     <label>Asistencia Técnica</label><br>
-                    <input name="" type="checkbox" value="" class="CheckBox">
+                    <input name="asistencia_tecnica" id="asistencia_tecnica" type="checkbox"  class="CheckBox">
                </div>
                
                <div id="entradaTexto">
                <label>Asociatividad Organización</label><br>
-               <input name="" type="checkbox" value="" class="CheckBox">
+               <input name="asociatividad_organizacion" id="asociatividad_organizacion" type="checkbox"  class="CheckBox">
                </div>
                
                <div id="entradaTexto">
                <label>Crédito</label><br>
-               <input name="" type="checkbox" value="" class="CheckBox">
+               <input name="credito" id="credito" type="checkbox"  class="CheckBox">
                </div>
                
                <div id="entradaTexto">
                <label>Poscosecha Manejo</label><br>
-               <input name="" type="checkbox" value="" class="CheckBox">
+               <input name="manejo_poscosecha" id="manejo_poscosecha" type="checkbox"  class="CheckBox">
                </div>
                
                <div id="entradaTexto">
                <label>Precios Mercados</label><br>
-               <input name="" type="checkbox" value="" class="CheckBox">
+               <input name="precios_mercados" id="precios_mercados" type="checkbox"  class="CheckBox">
                </div>
                
                <div id="entradaTexto">
                <label>Qué Cultivar</label><br>
-               <input name="" type="checkbox" value="" class="CheckBox">
+               <input name="que_cultivar" id="que_cultivar" type="checkbox"  class="CheckBox">
                </div>
                
                <div id="entradaTexto">
                <label>Tecnologías</label><br>
-               <input name="" type="checkbox" value="" class="CheckBox">
+               <input name="tecnologias" id= "tecnologias" type="checkbox"  class="CheckBox">
                </div>
                
                
                <div id="entradaTexto">
                <label>Temas Ambientales</label><br>
-               <input name="" type="checkbox" value="" class="CheckBox">
+               <input name="temas_ambientales" id="temas_ambientales" type="checkbox"  class="CheckBox">
                </div>
                
                
                <div id="entradaTexto">
-               <button class="boton">Seleccionar Todos</button>
+               <a class="boton" id ="seleccionar_todos">Seleccionar Todos</a>
+
+               <a class="boton" id ="quitar_todos">Quitar Todos</a>
+
                </div>
-               
-               
-               
     	</div>
             <br>
             

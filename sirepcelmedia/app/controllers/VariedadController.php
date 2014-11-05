@@ -26,11 +26,18 @@ class VariedadController extends BaseController{
 		return Redirect::to('/AddProducto');
 		
 	}
-
+//  ajax 
 	public function eliminarvariedad(){
-		$id= 5;
-		$variedad = Variedad::find($id);
-		$variedad->delete();
+
+  //   if(Request::ajax()){
+
+		// return array('vector' => 'prueba','filtro'=>'nombre y cadena');
+
+		// }
+
+		//$variedad = Variedad::find($id);
+		//$variedad->delete();
+
 		
 	}
 
@@ -256,6 +263,8 @@ public function guardarvariedad(){
 				$variedad->cadena()->associate($cadena);
 	    	}
 			$variedad->save();
+			return array('resultado' => 'Se Guardo');
+
 			return 1;
 
 		}
@@ -322,6 +331,8 @@ public function guardarvariedad(){
 				$variedad->cadena()->associate($cadena);
 	    	}
 			$variedad->save();
+			return array('resultado' => 'Se Guardo');
+
 			return 1;
 
 		}
@@ -381,7 +392,7 @@ public function guardarvariedad(){
 				$variedad->cadena()->associate($cadena);
 	    	}
 			$variedad->save();
-			return 1;
+			return array('resultado' => 'Se Guardo');
 		}
 
 
@@ -492,13 +503,150 @@ public  function listarvariedades(){
             ->join('grupos', 'grupos.id', '=', 'variedades.grupo_id')
             ->join('sub_grupos', 'sub_grupos.id', '=', 'variedades.subgrupo_id')
             ->join('productos', 'productos.id', '=', 'variedades.producto_id')
-            ->select('variedades.nombre_variedad', 'variedades.id', 'cadenas.nombre_cadena','grupos.nombre_grupo','sub_grupos.nombre_sub_grupo','productos.nombre_producto')
+            ->select('variedades.codigo_dane','variedades.nombre_variedad', 'variedades.id', 'cadenas.nombre_cadena','grupos.nombre_grupo','sub_grupos.nombre_sub_grupo','productos.nombre_producto')
             ->get();
 
             //return $join;
 
 		return View::make('ModuloProductos.ListaProducto',array('join'=>$join, 'variedades'=>$variedades,'grupos'=>$grupos,'subgrupos'=>$subgrupos,'productos'=>$productos,'cadenas'=>$cadenas));
 	}
+
+
+
+	public  function filtrarvariedad(){
+
+		if (Input::get('eliminar')) {
+			$variable = Input::get('eliminar');
+
+			foreach ($variable as $key ) {
+				$variedad = Variedad::find($key);
+				$variedad->delete();
+			}
+
+
+			// Volver a listar
+			$filtrar_cadena = DB::table('variedades')
+			->join('cadenas', 'cadenas.id', '=', 'variedades.cadena_id')
+            ->join('grupos', 'grupos.id', '=', 'variedades.grupo_id')
+            ->join('sub_grupos', 'sub_grupos.id', '=', 'variedades.subgrupo_id')
+            ->join('productos', 'productos.id', '=', 'variedades.producto_id')
+            ->select('variedades.nombre_variedad', 'variedades.id', 'cadenas.nombre_cadena','grupos.nombre_grupo','sub_grupos.nombre_sub_grupo','productos.nombre_producto');
+
+			return array('vector' => $filtrar_cadena,'filtro'=>'cadena');
+		}
+
+
+        // ------------------------------------------
+        //      Resultado Filtro solo cadena
+        //  ------------------------------------------
+		if (Input::get('cadena')&&Input::get('cadena')!='seleccionar'&& !Input::get('filtra_variedad')) {
+			$filtrar_cadena = DB::table('variedades')
+			->join('cadenas', 'cadenas.id', '=', 'variedades.cadena_id')
+            ->join('grupos', 'grupos.id', '=', 'variedades.grupo_id')
+            ->join('sub_grupos', 'sub_grupos.id', '=', 'variedades.subgrupo_id')
+            ->join('productos', 'productos.id', '=', 'variedades.producto_id')
+            ->select('variedades.nombre_variedad', 'variedades.id', 'cadenas.nombre_cadena','grupos.nombre_grupo','sub_grupos.nombre_sub_grupo','productos.nombre_producto')
+			->where('cadena_id', Input::get('cadena'))->get();
+
+			return array('vector' => $filtrar_cadena,'filtro'=>'cadena');
+		// ------------------------------------------
+        //      Resultado Filtro solo Nombre
+        //  ------------------------------------------
+		}elseif (Input::get('filtra_variedad')&& Input::get('cadena')=='seleccionar' &&Input::get('select_grupo')=='seleccionar'){
+			$filtrar_cadena = DB::table('variedades')
+			->join('cadenas', 'cadenas.id', '=', 'variedades.cadena_id')
+            ->join('grupos', 'grupos.id', '=', 'variedades.grupo_id')
+            ->join('sub_grupos', 'sub_grupos.id', '=', 'variedades.subgrupo_id')
+            ->join('productos', 'productos.id', '=', 'variedades.producto_id')
+            ->select('variedades.nombre_variedad', 'variedades.id', 'cadenas.nombre_cadena','grupos.nombre_grupo','sub_grupos.nombre_sub_grupo','productos.nombre_producto')
+			->where('nombre_variedad','LIKE', '%'.Input::get('filtra_variedad').'%')->get();
+
+			return array('vector' => $filtrar_cadena,'filtro'=>'nombre');
+		// ------------------------------------------
+        //      Resultado Filtro solo Nombre y Cadena
+        //  ------------------------------------------
+		}elseif (Input::get('filtra_variedad')&& Input::get('cadena')!='seleccionar' && Input::get('cadena')){
+			$filtrar_cadena = DB::table('variedades')
+			->join('cadenas', 'cadenas.id', '=', 'variedades.cadena_id')
+            ->join('grupos', 'grupos.id', '=', 'variedades.grupo_id')
+            ->join('sub_grupos', 'sub_grupos.id', '=', 'variedades.subgrupo_id')
+            ->join('productos', 'productos.id', '=', 'variedades.producto_id')
+            ->select('variedades.nombre_variedad', 'variedades.id', 'cadenas.nombre_cadena','grupos.nombre_grupo','sub_grupos.nombre_sub_grupo','productos.nombre_producto')
+			->where('nombre_variedad','LIKE', '%'.Input::get('filtra_variedad').'%')
+			->where('cadena_id', Input::get('cadena'))
+			->get();
+
+			return array('vector' => $filtrar_cadena,'filtro'=>'nombre y cadena');
+
+		// ------------------------------------------
+        //      Resultado Filtro Grupo, subgrupo , Producto
+        //  ------------------------------------------
+		}elseif (!Input::get('filtra_variedad') && Input::get('select_grupo')!='seleccionar'){
+
+			$filtrar_cadena = DB::table('variedades')
+			->join('cadenas', 'cadenas.id', '=', 'variedades.cadena_id')
+            ->join('grupos', 'grupos.id', '=', 'variedades.grupo_id')
+            ->join('sub_grupos', 'sub_grupos.id', '=', 'variedades.subgrupo_id')
+            ->join('productos', 'productos.id', '=', 'variedades.producto_id')
+            ->select('variedades.nombre_variedad', 'variedades.id', 'cadenas.nombre_cadena','grupos.nombre_grupo','sub_grupos.nombre_sub_grupo','productos.nombre_producto')
+			->where('variedades.grupo_id', Input::get('select_grupo'));
+			// Agregamos filtro sub grupo
+			if (Input::get('subgrupo')!='seleccionar') {
+				$filtrar_cadena->where('variedades.subgrupo_id', Input::get('subgrupo'));
+			}
+			// Agregamos filtro Producto
+			if (Input::get('producto')!='seleccionar') {
+				$filtrar_cadena->where('variedades.producto_id', Input::get('producto'));
+			}
+			
+			$resultado= $filtrar_cadena->get();
+
+			return array('vector' => $resultado,'filtro'=>'grupo , sub grupo ,Producto');
+		
+
+		// ------------------------------------------
+        //      Resultado Filtro Grupo y texto , subgrupo , Producto 
+        //  ------------------------------------------
+		}elseif ( Input::get('filtra_variedad') && Input::get('select_grupo')!='seleccionar'){
+
+			//return array('filtro'=>'entro');
+
+		$filtrar_cadena = DB::table('variedades')
+			->join('cadenas', 'cadenas.id', '=', 'variedades.cadena_id')
+            ->join('grupos', 'grupos.id', '=', 'variedades.grupo_id')
+            ->join('sub_grupos', 'sub_grupos.id', '=', 'variedades.subgrupo_id')
+            ->join('productos', 'productos.id', '=', 'variedades.producto_id')
+            ->select('variedades.nombre_variedad', 'variedades.id', 'cadenas.nombre_cadena','grupos.nombre_grupo','sub_grupos.nombre_sub_grupo','productos.nombre_producto')
+			->where('variedades.grupo_id', Input::get('select_grupo'))
+			->where('nombre_variedad','LIKE', '%'.Input::get('filtra_variedad').'%');
+			// Agregamos filtro sub grupo
+			if (Input::get('subgrupo')!='seleccionar') {
+				$filtrar_cadena->where('variedades.subgrupo_id', Input::get('subgrupo'));
+			}
+			// Agregamos filtro Producto
+			if (Input::get('producto')!='seleccionar') {
+				$filtrar_cadena->where('variedades.producto_id', Input::get('producto'));
+			}
+			
+			$resultado= $filtrar_cadena->get();
+
+			return array('vector' => $resultado,'filtro'=>'nombre grupo her');
+// Sin ningun Filtro
+		}else {
+			$filtrar_cadena = DB::table('variedades')
+			->join('cadenas', 'cadenas.id', '=', 'variedades.cadena_id')
+            ->join('grupos', 'grupos.id', '=', 'variedades.grupo_id')
+            ->join('sub_grupos', 'sub_grupos.id', '=', 'variedades.subgrupo_id')
+            ->join('productos', 'productos.id', '=', 'variedades.producto_id')
+            ->select('variedades.nombre_variedad', 'variedades.id', 'cadenas.nombre_cadena','grupos.nombre_grupo','sub_grupos.nombre_sub_grupo','productos.nombre_producto');
+			
+			$resultado= $filtrar_cadena->get();
+
+			return array('vector' => $resultado,'filtro'=>'sin filtro');
+
+		}
+
+	} // fin filtrar variedad
 
 	
 

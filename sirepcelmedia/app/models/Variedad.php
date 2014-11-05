@@ -23,6 +23,10 @@ class Variedad extends Eloquent {
 	public function grupo(){
 		return $this->belongsTo('Grupo');
 	}
+
+	public function variedad(){
+		return $this->hasMany('ProductorVariedad','variedad_id');
+	}
 	
 /*
 	public function variedad(){

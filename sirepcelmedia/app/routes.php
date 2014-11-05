@@ -122,11 +122,13 @@ Route::get('filtrar_productos/{subgrupo_id}','ProductoController@filtrar_product
 
 
 
+Route::get('ListarVariedades', 'VariedadController@listarvariedades');
+
+
 Route::post('guardarvariedad', 'VariedadController@guardarvariedad');
+Route::post('filtrarvariedad', 'VariedadController@filtrarvariedad');
 
 
-
-Route::get('listarvariedades', 'VariedadController@listarvariedades');
 
 
 //------------------------------------------------------------
@@ -186,8 +188,7 @@ Route::get('listarproductos', 'ProductoController@listarproductos');
 //------------------------------------------------------------
 Route::get('crearvariedad', 'VariedadController@crearvariedad');
 Route::get('actualizarvariedad', 'VariedadController@actualizarvariedad');
-Route::get('eliminarvariedad', 'VariedadController@eliminarvariedad');
-Route::get('ListaVariedades', 'VariedadController@listarvariedad');
+// Route::get('eliminarvariedad', 'VariedadController@eliminarvariedad');
 
 
 //------------------------------------------------------------

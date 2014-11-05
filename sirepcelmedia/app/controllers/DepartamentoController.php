@@ -4,7 +4,7 @@ class DepartamentoController extends BaseController{
 
 	//Metodo crear grupo
 	public function creardepartamento(){
-		for ($i=0; $i < 100000; $i++) { 
+		for ($i=0; $i < 100; $i++) { 
 		$departamento = new Departamento;
 		$departamento->nombre_departamento='Departamento ';
 		$departamento->save();

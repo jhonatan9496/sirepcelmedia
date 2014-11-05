@@ -5,12 +5,21 @@
 	<title> @yield('titulo') </title>
 
 	{{ HTML::style('css/style.css') }}
+    {{ HTML::style('css/jquery-ui.css') }}
+
 	{{ HTML::script('js/jquery-1.6.4.min.js') }}
     {{ HTML::script('js/jquery.js') }}
+    
+    {{ HTML::script('js/jquery-1.10.2.js') }}
+    {{ HTML::script('js/jquery-ui.js') }}
     {{ HTML::script('js/functions.js') }}
 
+
+
+
+
 </head>
-<body>
+  <body>
 
 
     <!--Cabecera -->

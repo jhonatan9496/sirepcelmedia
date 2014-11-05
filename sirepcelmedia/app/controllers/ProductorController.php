@@ -46,9 +46,112 @@ class ProductorController extends BaseController{
 
 		$productor->save();
 
+		if (Input::get('asistencia_tecnica')) {
+			$productorbuscar = Productor::find($productor->id);
+			$informacionbuscar = Informacion::find(1);
+
+			$productor_informacion = new ProductorInformacion;
+			$productor_informacion->eliminado=0;
+			$productor_informacion->productor()->associate($productorbuscar);
+			$productor_informacion->informacion()->associate($informacionbuscar);
+			$productor_informacion->save();
+		}
+		if (Input::get('asociatividad_organizacion')) {
+			$productorbuscar = Productor::find($productor->id);
+			$informacionbuscar = Informacion::find(2);
+
+			$productor_informacion = new ProductorInformacion;
+			$productor_informacion->eliminado=0;
+			$productor_informacion->productor()->associate($productorbuscar);
+			$productor_informacion->informacion()->associate($informacionbuscar);
+			$productor_informacion->save();
+		}
+		if (Input::get('credito')) {
+			$productorbuscar = Productor::find($productor->id);
+			$informacionbuscar = Informacion::find(3);
+
+			$productor_informacion = new ProductorInformacion;
+			$productor_informacion->eliminado=0;
+			$productor_informacion->productor()->associate($productorbuscar);
+			$productor_informacion->informacion()->associate($informacionbuscar);
+			$productor_informacion->save();
+		}
+		if (Input::get('manejo_poscosecha')) {
+			$productorbuscar = Productor::find($productor->id);
+			$informacionbuscar = Informacion::find(4);
+
+			$productor_informacion = new ProductorInformacion;
+			$productor_informacion->eliminado=0;
+			$productor_informacion->productor()->associate($productorbuscar);
+			$productor_informacion->informacion()->associate($informacionbuscar);
+			$productor_informacion->save();
+		}
+		if (Input::get('precios_mercados')) {
+			$productorbuscar = Productor::find($productor->id);
+			$informacionbuscar = Informacion::find(5);
+
+			$productor_informacion = new ProductorInformacion;
+			$productor_informacion->eliminado=0;
+			$productor_informacion->productor()->associate($productorbuscar);
+			$productor_informacion->informacion()->associate($informacionbuscar);
+			$productor_informacion->save();
+		}
+		if (Input::get('que_cultivar')) {
+			$productorbuscar = Productor::find($productor->id);
+			$informacionbuscar = Informacion::find(6);
+
+			$productor_informacion = new ProductorInformacion;
+			$productor_informacion->eliminado=0;
+			$productor_informacion->productor()->associate($productorbuscar);
+			$productor_informacion->informacion()->associate($informacionbuscar);
+			$productor_informacion->save();
+		}
+		if (Input::get('tecnologias')) {
+			$productorbuscar = Productor::find($productor->id);
+			$informacionbuscar = Informacion::find(7);
+
+			$productor_informacion = new ProductorInformacion;
+			$productor_informacion->eliminado=0;
+			$productor_informacion->productor()->associate($productorbuscar);
+			$productor_informacion->informacion()->associate($informacionbuscar);
+			$productor_informacion->save();
+		}
+		if (Input::get('temas_ambientales')) {
+			$productorbuscar = Productor::find($productor->id);
+			$informacionbuscar = Informacion::find(8);
+
+			$productor_informacion = new ProductorInformacion;
+			$productor_informacion->eliminado=0;
+			$productor_informacion->productor()->associate($productorbuscar);
+			$productor_informacion->informacion()->associate($informacionbuscar);
+			$productor_informacion->save();
+		}
+
+
+		for ($i=1; $i < 20; $i++) { 
+			
+			$buscar = "variedad"+$i;
+
+			$productorbuscar = Productor::find($productor->id);
+			$variedadbuscar = Variedad::find(Input::get('variedad'.$i));
+			//$variedadbuscar = DB::table('variedades')->where('nombre_variedad', Input::get('variedad2'))->first();
+
+if ($variedadbuscar) {
+	# code...
+			$productor_variedad = new ProductorVariedad;
+			$productor_variedad->eliminado=0;
+			$productor_variedad->produc()->associate($productorbuscar);
+			$productor_variedad->variedad()->associate($variedadbuscar);
+			$productor_variedad->save();
+}
+
+		}
+
 		//return Redirect::to('/AddProductor');
 		//return View::make('ModuloProductores/ModificarProductor',array('alert' =>'Productor guardado','productorActualizar'=>$productor,'variedades'=>$variedades,'actividades'=>$actividad,'municipios'=>$municipio,'departamentos'=>$departamento,'operadores'=>$operador,'fuentes'=>$fuente));
-return View::make('ModuloProductores/BuscarProductor');		
+		// direcciona a buscar un productor
+		//return View::make('ModuloProductores/BuscarProductor')->with('mensaje_error', 'Productor Creado.');	
+		return Redirect::to('BuscarProductor')->with('mensaje_error','El productor ha sido creado');	
 	}
 
 

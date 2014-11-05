@@ -18,7 +18,7 @@
         <!--Este es el contenido de la Pagina -->
         <div id="contenedorResponsive">
             <div>
-                <a href="{{ url('/ListaVariedades') }}">
+                <a href="{{ url('/ListarVariedades') }}">
                     <button class="boton">Lista</button>
                 </a>
             </div>
@@ -107,7 +107,6 @@
           <div id="cajas">
 				<div id="titulos">Producto</div>
 				<br>
-  				
                 
                 <div id="entradaTexto">
                     <div style="height:20px; vertical-align: top">
@@ -117,8 +116,6 @@
                           <option value="seleccionar">Seleccionar</option>
                     </select>
                 </div>
-                
-                
             
                 <div id="entradaTexto">
 

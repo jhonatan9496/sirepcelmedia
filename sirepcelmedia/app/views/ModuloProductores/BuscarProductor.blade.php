@@ -16,6 +16,17 @@
     
 
     <div id="contenedorResponsive">
+
+        {{-- Preguntamos si hay algún mensaje de error y si hay lo mostramos  --}}
+        @if(Session::has('mensaje_error'))
+  <div class="alerta">
+            {{ Session::get('mensaje_error') }}
+            </div>
+
+        @endif
+
+        <br>
+
         <!-- Buscar Productores -->
         <div id="cajas">
        		<div id="titulos">Buscar Productor</div>
