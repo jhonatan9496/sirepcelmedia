@@ -2,58 +2,65 @@
 
 class VariedadController extends BaseController{
 
-	//Metodo crear grupo
+//------------------------------------------------------------
+//Metodo crear Variedad
+//------------------------------------------------------------
 	public function crearvariedad(){
-
-		
-
+// Captura los id de las llaves foraneas captura por get y fueron enviados por post
 		$cadena = Cadena::find(Input::get('cadena'));
 		$subgrupo = SubGrupo::find(Input::get('subgrupo'));
 		$grupo = Grupo::find(Input::get('grupo'));
 		$producto = Producto::find(Input::get('producto'));
-
+// Crea un nuevo objeto variedad 
 		$variedad = new Variedad;
 		$variedad->nombre_variedad=Input::get('nombre_variedad');
-
+// Despues se Asocial las llaves llamando el metodo que se creo
+// En el modelo Variedad que hace referencia al id de cada tabla
 		$variedad->subgrupo()->associate($subgrupo);
 		$variedad->cadena()->associate($cadena);
 		$variedad->grupo()->associate($grupo);
 		$variedad->producto()->associate($producto);
-
+// Guardar Variedad con el metodo save
 		$variedad->save();
-
-
+// Despues de Crear Redirecciona a Agregar un producto de nuevo
 		return Redirect::to('/AddProducto');
 		
 	}
-//  ajax 
-	public function eliminarvariedad(){
 
-  //   if(Request::ajax()){
+//------------------------------------------------------------
+//Metodo eliminar Variedad
+//------------------------------------------------------------
+	public function eliminarvariedad($id){
 
-		// return array('vector' => 'prueba','filtro'=>'nombre y cadena');
+		$variedad = Variedad::find($id);
+		$variedad->delete();
 
-		// }
-
-		//$variedad = Variedad::find($id);
-		//$variedad->delete();
-
-		
 	}
 
-		public function actualizarvariedad(){
-		$variedad = Variedad::find(1);
+//------------------------------------------------------------
+//Metodo actualizar  Variedad
+//------------------------------------------------------------
+		public function actualizarvariedad($id){
+// primero se busca la variedad 
+		$variedad = Variedad::find($id);
+//  y se le asigna los nuevos valores a la variedad como si se estuviera guardando
 		$variedad->nombre_variedad='Variedad Actualizar';
+//  Se guarda con el metodo save 
 		$variedad->save();
 	}
-
+//------------------------------------------------------------
+//Metodo Listar   Variedad
+// Retorna el vectores de Variedades, Grupos ,cadena , Subgrupos,Productos 
+//------------------------------------------------------------
 	public  function listarvariedad(){
-
+// Listamos nombre y id de cadena,productos,grupos,subgrupos,productos
+// estos vectores se asignan los select  
 		$cadena=Cadena::all()->lists('nombre_cadena','id');
 		$grupos=Grupo::all()->lists('nombre_grupo','id');
 		$subgrupos=SubGrupo::all()->lists('nombre_sub_grupo','id');
 		$productos=Producto::all()->lists('nombre_producto','id');
-
+// Consulta construida con join para obtener las variedades con los respectivos
+// nombres de las llaves foraneas a las que pertenece 
 		$variedades=DB::table('variedades')
             ->join('cadenas', 'cadenas.id', '=', 'variedades.cadena_id')
             ->join('grupos', 'grupos.id', '=', 'variedades.grupo_id')
@@ -61,24 +68,22 @@ class VariedadController extends BaseController{
             ->join('productos', 'productos.id', '=', 'variedades.producto_id')
             ->select('variedades.nombre_variedad', 'cadenas.nombre_cadena','grupos.nombre_grupo','sub_grupos.nombre_sub_grupo','productos.nombre_producto')
             ->get();
+// retornamos la plantilla de listar productos y los vectores que seran asignaos a los select y la informacion de las tablas 
 
 		return View::make('ModuloProductos.ListarProductos',array('cadenas'=>$cadena,'produc'=>$variedades,'grupos'=>$grupos,'subgrupos'=>$subgrupos,'productos'=>$productos));
 
             return $consulta;
 
 /*
-
 		$variedades=Variedad::all();
 		$cadena=Cadena::all();
 		$grupos=Grupo::all()->lists('nombre_grupo','id');
 		$subgrupos=SubGrupo::all()->lists('nombre_sub_grupo','id');
 		$productos=Producto::all()->lists('nombre_producto','id');
-		
 		foreach ($variedades as $cadavariedad) {
 			foreach ($cadena as $key) {
 				if ($key->id == $cadavariedad->cadena_id) {
 		$cadavariedad += $cadavariedad + 'q'->'q';
-
 		return $cadavariedad;
 		return View::make('ModuloProductos.ListarProductos',array('cadenas'=>$cadena,'produc'=>$variedades,'grupos'=>$grupos,'subgrupos'=>$subgrupos,'productos'=>$productos));
 					
@@ -86,11 +91,12 @@ class VariedadController extends BaseController{
 			}
 		}
 		*/
-
 		//$cadenas=Cadena::find($variedades->cadena_id)->lists('nombre_cadena','id');
 		//return View::make('ModuloProductos.ListarProductos',array('cadenas'=>$cadena,'produc'=>$variedades,'grupos'=>$grupos,'subgrupos'=>$subgrupos,'productos'=>$productos,'cadenas'=>$cadenas));
 	}
-
+//------------------------------------------------------------
+//Metodo Guardar   Variedad
+//------------------------------------------------------------
 public function guardarvariedad(){
     
  //comprobamos si es una petición ajax

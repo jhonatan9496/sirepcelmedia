@@ -14,7 +14,12 @@
 
 //------------------------------------------------------------
 //                Modulo Login
+// Son las rutas del modulo que carga las plantillas referentes
+// a login  y menu de usuarios
 //------------------------------------------------------------
+
+// esta ruta redirecciona cuando se entre a la direccion 
+// inicial o url  a la plantillla de login
 Route::get('/', function()
 {
 	return View::make('Login/login');
@@ -22,16 +27,14 @@ Route::get('/', function()
 
 
 
+// Route::get('/pruebas', function()
+// {
+// $operadores = Operador::all();
+// return $operadores;
 
-
-Route::get('/pruebas', function()
-{
-$operadores = Operador::all();
-return $operadores;
-
-	//return Response::json(SubGrupo::all());
-	//return View::make('ModuloProductos/pruebasection');
-});
+// 	//return Response::json(SubGrupo::all());
+// 	//return View::make('ModuloProductos/pruebasection');
+// });
 
 
 
@@ -52,44 +55,45 @@ Route::group(array('before' => 'auth'), function()
     // Esta ruta nos servirá para cerrar sesión.
     Route::get('logout', 'AuthController@logOut');
 
-
-
-
-
+//------------------------------------------------------------
+//               Fin Modulo Login
+//------------------------------------------------------------
 
 //------------------------------------------------------------
 //                Modulo productores
+// Rutas pertenecientes al modulo productores que estan dentro de 
+// autenticacion solo se va a acceder si existe un usuario autenticado
 //------------------------------------------------------------
 
 
+// Agregar Productores 
+// renderiza la plantilla y envia en vector las variedades
 Route::get('/AddProductor', function()
 {
+	$operadores = Operador::all()->lists('nombre_operador','id');
 
-$operadores = Operador::all()->lists('nombre_operador','id');
-
-
-$fuentes = Fuente::all()->lists('nombre_fuente','id');
-$departamentos  = Departamento::all()->lists('nombre_departamento','id');
-$municipios = Municipio::all()->lists('nombre_municipio','id');
-$actividades = Actividad::all()->lists('nombre_actividad','id');
-
-$variedades = Variedad::all()->lists('nombre_variedad','id');
+	$fuentes = Fuente::all()->lists('nombre_fuente','id');
+	$departamentos  = Departamento::all()->lists('nombre_departamento','id');
+	$municipios = Municipio::all()->lists('nombre_municipio','id');
+	$actividades = Actividad::all()->lists('nombre_actividad','id');
+	$variedades = Variedad::all()->lists('nombre_variedad','id');
 
 	return View::make('ModuloProductores/AgregarProductores',array('variedades'=>$variedades,'actividades'=>$actividades,'municipios'=>$municipios,'departamentos'=>$departamentos,'operadores'=>$operadores,'fuentes'=>$fuentes));
 });
-
+//  Retorna  Vista buscar Productor
 Route::get('BuscarProductor', function(){
 
 	return View::make('ModuloProductores/BuscarProductor');
 });
-
+//------------------------------------------------------------
+//               Fin  Modulo Productos
+//------------------------------------------------------------
 
 //------------------------------------------------------------
 //                Modulo Productos
 //------------------------------------------------------------
 
-Route::get('/AddProducto', function()
-{
+Route::get('/AddProducto', function(){
 	
 	$grupos=Grupo::all()->lists('nombre_grupo','id');
 	$subgrupos=SubGrupo::all()->lists('nombre_sub_grupo','id');
@@ -120,33 +124,43 @@ Route::get('filtrar_productos/{subgrupo_id}','ProductoController@filtrar_product
 //  esta url es llamada por el formulairo de agregar variedad via ajax 
 //  y guarda el formulario de variedad en el metodo del controlador
 
-
-
 Route::get('ListarVariedades', 'VariedadController@listarvariedades');
 
-
+//  Esta url es llamada por ajax enviando un formulario via post 
+// que guarda los valores obtenidos en una variedad, valida y los muestra
+// Llamada en la vista de AgregarVariedad
 Route::post('guardarvariedad', 'VariedadController@guardarvariedad');
+// Esta url es llamada por ajax via post para filtrar las variedades 
+// llamada en la vista de Listar Variedades 
 Route::post('filtrarvariedad', 'VariedadController@filtrarvariedad');
 
-
-
+//------------------------------------------------------------
+//               Fin  Modulo  Productos  
+//------------------------------------------------------------
 
 //------------------------------------------------------------
 //                Modulo Envios Masivos 
 //------------------------------------------------------------
 
-	Route::get('/EnviosMasivos', function()
-{
-	return View::make('ModuloEnviosMasivos/EnviosMasivos');
-});
+	Route::get('/EnviosMasivos', function(){
+		return View::make('ModuloEnviosMasivos/EnviosMasivos');
+	});
 
+//------------------------------------------------------------
+//                Fin Modulo Envios Masivos 
+//------------------------------------------------------------
+
+//------------------------------------------------------------
 // Cierra verificacion autenticacion
 // Hacia arriba las rutas son obligatorias estar logueado
+//------------------------------------------------------------
+
 });
 
 //------------------------------------------------------------
 //------------------------------------------------------------
-//                CONTROLADORES
+//               CONTROLADORES Que contienen las
+// 		funciones basicas de cada Modelo o Tabla de datos CRUD 
 //------------------------------------------------------------
 //------------------------------------------------------------
 
